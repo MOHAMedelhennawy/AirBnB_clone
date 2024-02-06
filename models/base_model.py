@@ -16,6 +16,7 @@ class BaseModel:
         '''
         the initialization method of attributes
         '''
+
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = datetime.now()
