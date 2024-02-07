@@ -5,7 +5,8 @@ Module that contain FileStorage class
 import json
 from os import path
 from models.base_model import BaseModel
-from datetime import datetime
+
+
 class FileStorage:
     """
     Class that serializes instances to a JSON file
@@ -22,7 +23,7 @@ class FileStorage:
         """
         returns the dictionary __objects
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
@@ -33,30 +34,30 @@ class FileStorage:
         """
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
-            self.__objects[key] = obj
+            FileStorage.__objects[key] = obj
 
     def save(self):
         """
         serializes __objects to the JSON file (path: __file_path)
         """
         dict = {}
-        for key, obj in self.__objects.items():
+        for key, obj in FileStorage.__objects.items():
             dict[key] = obj.to_dict()
 
-        with open(self.__file_path, 'w') as f:
-            json.dump(dict, f)
-
+        with open(FileStorage.__file_path, 'w') as f:
+             f.write(json.dumps(dict))
 
     def reload(self):
         """
         deserializes the JSON file to __objects
         """
-        if path.exists(self.__file_path) and self.__objects:
+        cls = {'BaseModel': BaseModel}
+        try:
             with open(self.__file_path, 'r') as file_obj:
-                dict = json.load(file_obj)
-                for key, value in dict.items():
-                    
-            
-
-
-
+                data_dict = json.load(file_obj)
+            for obj_dict in data_dict.values():
+                cls_name = obj_dict['__class__']
+                cls_name = cls[cls_name]
+                self.new(cls_name(**obj_dict))
+        except FileNotFoundError:
+            pass

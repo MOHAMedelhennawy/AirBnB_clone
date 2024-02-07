@@ -5,7 +5,7 @@ module that contain BaseModel
 
 from uuid import uuid4
 from datetime import datetime
-from models.__init__ import storage
+from models import storage
 
 class BaseModel:
     '''
