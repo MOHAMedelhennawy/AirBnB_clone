@@ -5,7 +5,7 @@ module that contain BaseModel
 
 from uuid import uuid4
 from datetime import datetime
-
+from models.__init__ import storage
 
 class BaseModel:
     '''
@@ -27,6 +27,7 @@ class BaseModel:
                     if key in ["created_at", "updated_at"]:
                         value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, value)
+        storage.new(self)
 
     def __str__(self):
         '''
@@ -42,6 +43,7 @@ class BaseModel:
         '''
 
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         '''

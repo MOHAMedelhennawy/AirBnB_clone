@@ -2,7 +2,7 @@
 """
 Module that contain FileStorage class
 """
-from json import dumps, loads
+import json
 from os import path
 
 
@@ -39,19 +39,21 @@ class FileStorage:
         """
         serializes __objects to the JSON file (path: __file_path)
         """
-        dict = {}
-        for key, obj in self.__objects.items():
-            dict[key] = obj.to_dict()
+        # dict = {}
+        # for key, obj in self.__objects.items():
+        #     dict[key] = obj.to_dict()
 
-        with open(self.__file_path, 'w') as f:
-            f.write(dumps(dict))
+        # with open(self.__file_path, 'w') as f:
+        #     f.write(dumps(dict))
+
+        with open(self.__file_path, 'w') as file_obj:
+            json.dump(self.__objects, file_obj)
 
     def reload(self):
         """
         deserializes the JSON file to __objects
         """
-        try:
-            with open(self.__file_path. 'r') as f:
-                dict = loads(f.read())
-        except FileNotFoundError:
-            pass
+        if path.exists(self.__file_path):
+            with open(self.__file_path, 'r') as file_obj:
+                self.__objects = json.load(file_obj)
+

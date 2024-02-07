@@ -49,10 +49,6 @@ class TestBase(unittest.TestCase):
         self.assertEqual(type(my_model2.id), str)
         self.assertEqual(type(my_model.id), type(my_model2.id))
 
-        # Check that id is of type string
-        self.assertIsInstance(my_model.id, str)
-        self.assertIsInstance(my_model2.id, str)
-
         # Checking that the two id are uniqe
         self.assertNotEqual(my_model.id, my_model2.id)
 
@@ -112,6 +108,9 @@ class TestBase(unittest.TestCase):
         self.assertNotEqual(my_model.id, my_model2.id)
         self.assertNotEqual(my_model.created_at, my_model2.created_at)
         self.assertNotEqual(my_model.updated_at, my_model2.updated_at)
+
+        excepted_output = f"[BaseModel] ({my_model.id}) {my_model.__dict__}"
+        self.assertEqual(excepted_output, str(my_model))
 
     def test_save(self):
         '''
