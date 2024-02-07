@@ -6,7 +6,6 @@ import json
 from os import path
 from models.base_model import BaseModel
 
-
 class FileStorage:
     """
     Class that serializes instances to a JSON file
@@ -53,7 +52,7 @@ class FileStorage:
         """
         cls = {'BaseModel': BaseModel}
         try:
-            with open(self.__file_path, 'r') as file_obj:
+            with open(FileStorage.__file_path, 'r') as file_obj:
                 data_dict = json.load(file_obj)
             for obj_dict in data_dict.values():
                 cls_name = obj_dict['__class__']
