@@ -4,8 +4,8 @@ Module that contain FileStorage class
 """
 import json
 from os import path
-
-
+from models.base_model import BaseModel
+from datetime import datetime
 class FileStorage:
     """
     Class that serializes instances to a JSON file
@@ -39,21 +39,24 @@ class FileStorage:
         """
         serializes __objects to the JSON file (path: __file_path)
         """
-        # dict = {}
-        # for key, obj in self.__objects.items():
-        #     dict[key] = obj.to_dict()
+        dict = {}
+        for key, obj in self.__objects.items():
+            dict[key] = obj.to_dict()
 
-        # with open(self.__file_path, 'w') as f:
-        #     f.write(dumps(dict))
+        with open(self.__file_path, 'w') as f:
+            json.dump(dict, f)
 
-        with open(self.__file_path, 'w') as file_obj:
-            json.dump(self.__objects, file_obj)
 
     def reload(self):
         """
         deserializes the JSON file to __objects
         """
-        if path.exists(self.__file_path):
+        if path.exists(self.__file_path) and self.__objects:
             with open(self.__file_path, 'r') as file_obj:
-                self.__objects = json.load(file_obj)
+                dict = json.load(file_obj)
+                for key, value in dict.items():
+                    
+            
+
+
 
