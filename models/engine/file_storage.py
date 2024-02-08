@@ -32,7 +32,7 @@ class FileStorage:
         Args:
         obj: object to be added to the dictionary
         """
-        if obj:
+        if obj and hasattr(obj, 'id'):
             key = "{}.{}".format(type(obj).__name__, obj.id)
             FileStorage.__objects[key] = obj
 
@@ -53,7 +53,7 @@ class FileStorage:
         """
         cls = {'BaseModel': BaseModel}
         try:
-            with open(FileStorage.__file_path, 'r') as file_obj:
+            with open(self.__file_path, 'r') as file_obj:
                 data_dict = json.load(file_obj)
             for obj_dict in data_dict.values():
                 cls_name = obj_dict['__class__']
