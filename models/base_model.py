@@ -7,6 +7,7 @@ from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
     '''
     BaseModel that defines all common attributes/methods for other classes
@@ -16,7 +17,7 @@ class BaseModel:
         '''
         the initialization method of attributes
         '''
-
+        format = "%Y-%m-%dT%H:%M:%S.%f"
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -25,7 +26,7 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key != "__class__":
                     if key in ["created_at", "updated_at"]:
-                        value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                        value = datetime.strptime(value, format)
                     setattr(self, key, value)
         models.storage.new(self)
 

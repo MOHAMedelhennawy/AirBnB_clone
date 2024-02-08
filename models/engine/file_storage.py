@@ -6,6 +6,7 @@ import json
 from os import path
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """
     Class that serializes instances to a JSON file
@@ -44,7 +45,7 @@ class FileStorage:
             dict[key] = obj.to_dict()
 
         with open(FileStorage.__file_path, 'w') as f:
-             f.write(json.dumps(dict))
+            f.write(json.dumps(dict))
 
     def reload(self):
         """
