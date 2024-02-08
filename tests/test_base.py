@@ -135,7 +135,7 @@ class TestBase(unittest.TestCase):
             )
         self.assertEqual(Err_msg, str(msg.exception))
 
-    def test_do_dict(self):
+    def test_to_dict(self):
         '''
         Test to_dict method
         '''
@@ -153,11 +153,14 @@ class TestBase(unittest.TestCase):
         self.assertNotEqual(my_model, my_model2)
         self.assertIsInstance(my_model2, BaseModel)
         self.assertIsInstance(my_model_json, dict)
+        self.assertEqual(my_model_json['__class__'], 'BaseModel')
+        datetime.strptime(str(my_model.created_at), '%Y-%m-%d %H:%M:%S.%f')
+        datetime.strptime(str(my_model.updated_at), '%Y-%m-%d %H:%M:%S.%f')
 
         with self.assertRaises(TypeError) as msg:
             my_model_json = my_model.to_dict("Args")
         Err_msg = (
-            "BaseModel.to_dict() takes 1 positional argument but 2 were given"
+            "to_dict() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 
