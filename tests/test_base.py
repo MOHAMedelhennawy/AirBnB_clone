@@ -131,7 +131,7 @@ class TestBase(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             my_model.save("passing arguments")
         Err_msg = (
-            "BaseModel.save() takes 1 positional argument but 2 were given"
+            "save() takes 1 positional argument but 2 were given"
             )
         self.assertEqual(Err_msg, str(msg.exception))
 

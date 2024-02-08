@@ -34,7 +34,7 @@ class TestStorage(unittest.TestCase):
         self.assertIsInstance(storage, FileStorage)
         with self.assertRaises(TypeError) as Err_msg:
             obj_Test = FileStorage("This arg")
-    
+
     def test_deleted_file(self):
         """
         Test that file deleted successfully
@@ -50,8 +50,12 @@ class TestStorage(unittest.TestCase):
         self.assertEqual(all_objs, {})
         self.assertIsInstance(all_objs, dict)
         self.assertFalse(os.path.exists("file.json"))
-        with self.assertRaises(TypeError) as Err_msg:
+        with self.assertRaises(TypeError) as msg:
             all_objs = storage.all("This arg")
+        Err_msg = (
+            "all() takes 1 positional argument but 2 were given"
+                   )
+        self.assertEqual(Err_msg, str(msg.exception))
 
     def test_save(self):
         """
@@ -67,22 +71,36 @@ class TestStorage(unittest.TestCase):
         self.assertNotEqual(all_objs, {})
         self.assertEqual(len(all_objs), 1)
         self.assertNotEqual(len(all_objs), 0)
-        with self.assertRaises(TypeError) as Err_msg:
+        with self.assertRaises(TypeError) as msg:
             my_model.save("This arg")
-    
+        Err_msg = (
+            "save() takes 1 positional argument but 2 were given"
+                   )
+        self.assertEqual(Err_msg, str(msg.exception))
+
     def test_new(self):
         """
         Test new method
         """
-
-        ...
+        my_model = BaseModel()
+        self.assertTrue(bool(FileStorage._FileStorage__objects))
 
     def test_reload(self):
         """
         Test reload method
         """
-
-        ...
+        my_model = BaseModel()
+        my_model.save()
+        storage = FileStorage()
+        all_objs = storage.all()
+        obj = all_objs['BaseModel.{}'.format(my_model.id)]
+        self.assertEqual(obj, my_model)
+        with self.assertRaises(TypeError) as msg:
+            storage.reload("This arg")
+        Err_msg = (
+            "reload() takes 1 positional argument but 2 were given"
+                   )
+        self.assertEqual(Err_msg, str(msg.exception))
 
 
 if __name__ == '__main__':
