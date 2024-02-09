@@ -11,7 +11,6 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     Classes_dict = {"BaseModel": BaseModel}
     all_objs = storage.all()
-    instance = []
     instance_representation = []
 
     def do_EOF(self, args):
@@ -58,10 +57,6 @@ class HBNBCommand(cmd.Cmd):
             new_obj.save()
             print("{}".format(new_obj.id))
 
-        # Create a list of instances
-        self.instance.append(new_obj)
-        self.instance_representation.append(new_obj.__str__())
-
     def do_show(self, arg):
         """
         Prints the string representation of an instance
@@ -80,22 +75,13 @@ class HBNBCommand(cmd.Cmd):
         if len(cmd_args) < 2:
             print("** instance id missing **")
             return
+
         key = "{}.{}".format(cmd_args[0], cmd_args[1])
         try:
             cls_name = self.Classes_dict[cmd_args[0]]
             print(cls_name(self.all_objs[key]))
         except KeyError:
             print("** no instance found **")
-        # Check for id in instance list and return obj if ture, otherwise do nothing "False"
-        # matching_instances = [check_id for check_id in self.instance if check_id.id == cmd_args[1]]
-
-        # if true print representation of an instance, otherwise print Err_msg
-        # if matching_instances:
-        #    print(matching_instances[0])
-        # else:
-        #   print("** no instance found **")
-        #   return
-
 
     def do_destroy(self, arg):
         """
@@ -117,19 +103,12 @@ class HBNBCommand(cmd.Cmd):
             return
         key = "{}.{}".format(cmd_args[0], cmd_args[1])
         try:
-            ...
+            deleted_representaiton = str(self.all_objs[key])
+            self.instance_representation.remove(deleted_representaiton)
+            del self.all_objs[key]
+            storage.save()
         except KeyError:
             print("** no instance found **")
-
-        # flag = 0
-        # for check_id in self.instance:
-        #     if check_id.id == cmd_args[1]:
-        #         flag = 1
-        #         representation = check_id.__str__() # Or you can write => str(check.id)
-        #         self.instance.remove(check_id)
-        #         self.instance_representation.remove(representation)
-        # if flag == 0:
-        #     print("** no instance found **")
 
 
     def do_all(self, arg):
@@ -138,15 +117,13 @@ class HBNBCommand(cmd.Cmd):
         based or not on the class name.
         Usage: all OR all <class name>
         """
-        # if cmd_args[0] not in self.Classes_dict.keys() and len(self.instance_representation) != 0:
-        #     print("** class doesn't exist **")
-        #     return
+
+        self.instance_representation = []
         if not arg:
             if self.all_objs:
                 for obj_dict in self.all_objs.values():
-                    print(obj_dict)
-            else:
-                print("[]")
+                    self.instance_representation.append(str(obj_dict))
+
         else:
             if arg not in self.Classes_dict.keys():
                 print("** class doesn't exist **")
@@ -154,7 +131,8 @@ class HBNBCommand(cmd.Cmd):
             for obj_dict in self.all_objs.values():
                 cls_name = self.Classes_dict[arg]
                 if isinstance(obj_dict, cls_name):
-                    print(obj_dict)
+                    self.instance_representation.append(str(obj_dict))
+        print(self.instance_representation)
 
     def do_update(self, arg):
         """
@@ -175,7 +153,6 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        # matching_instances = [check_id for check_id in self.instance if check_id.id == cmd_args[1]]
         key = "{}.{}".format(cmd_args[0], cmd_args[1])
         try:
             obj_dict = self.all_objs[key]
@@ -186,16 +163,17 @@ class HBNBCommand(cmd.Cmd):
         if len(cmd_args) < 3:
             print("** attribute name missing **")
             return
-        
+
         if len(cmd_args) < 4:
             print("** value missing **")
             return
 
-        var, value = cmd_args[2], cmd_args[3]
-        obj_dict[var] = value
-        cls_name = self.Classes_dict[cmd_args[0]]
-        obj = cls_name[obj_dict]
-        obj.save()
+        # print(obj_dict)
+        var, value = cmd_args[2], cmd_args[3].strip('"')
+        if var not in ["id", "updated_at", "created_at"]:
+            setattr(obj_dict, var, value)
+            obj_dict.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
