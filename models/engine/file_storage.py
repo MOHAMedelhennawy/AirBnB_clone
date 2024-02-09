@@ -5,6 +5,7 @@ Module that contain FileStorage class
 import json
 from os import path
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -51,7 +52,7 @@ class FileStorage:
         """
         deserializes the JSON file to __objects
         """
-        cls = {'BaseModel': BaseModel}
+        cls = {'BaseModel': BaseModel, 'User': User}
         try:
             with open(self.__file_path, 'r') as file_obj:
                 data_dict = json.load(file_obj)
