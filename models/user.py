@@ -1,20 +1,14 @@
 #!/usr/bin/python3
-'''
-Module that contain user class
-'''
+"""user class, subclass of BaseModel
+"""
+
 from models.base_model import BaseModel
+import json
 
 
 class User(BaseModel):
-    '''
-    Classs that represents a user
+    '''subclass of BaseModel class'''
 
-    Attributes:
-    email(str): the email of the user
-    password(str): the password of the user
-    first_name(str): the first name of the user
-    last_name(str): the second name of the user
-    '''
     email = ""
     password = ""
     first_name = ""

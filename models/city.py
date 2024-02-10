@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 """
-This Model contains city class
+City class, a subclass of BaseModel
 """
 from models.base_model import BaseModel
 
 
 class City(BaseModel):
     """
-    class that defines the city
-
-    Attributes:
-    state_id(str): the state_id
-    name (str): the city name
+    A subclass of BaseModel class
+    Public class attributes:
+        state_id: (str) will be State.id
+        name:     (str)
     """
     state_id = ""
     name = ""
