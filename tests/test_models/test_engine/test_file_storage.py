@@ -17,6 +17,7 @@ from models.base_model import BaseModel
 class TestFileStorage(unittest.TestCase):
     """Test class for FileStorage class."""
 
+    @classmethod
     def setUp(self):
         try:
             os.remove("file.json")
@@ -24,10 +25,39 @@ class TestFileStorage(unittest.TestCase):
             pass
         FileStorage._FileStorage__objects = {}
 
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+        FileStorage._FileStorage__objects = {}
+
+    def test_FileStorage_instantiation_no_args(self):
+        self.assertEqual(type(FileStorage()), FileStorage)
+
+    def test_FileStorage_instantiation_with_arg(self):
+        with self.assertRaises(TypeError):
+            FileStorage(None)
+
+    def test_FileStorage_file_path_is_private_str(self):
+        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+
+    def testFileStorage_objects_is_private_dict(self):
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
+
+    def test_storage_initializes(self):
+        self.assertEqual(type(models.storage), FileStorage)
+
     def test_FileStorage(self):
         """
         Test FileStorage attributes
         """
+
         self.assertIsInstance(FileStorage(), FileStorage)
         self.assertIsInstance(FileStorage._FileStorage__objects, dict)
         self.assertIsInstance(FileStorage._FileStorage__file_path, str)
@@ -110,6 +140,7 @@ class TestFileStorage(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             models.storage.reload(None)
+
 
 if __name__ == '__main__':
     unittest.main()
