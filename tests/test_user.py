@@ -15,7 +15,7 @@ class TestBase(unittest.TestCase):
     """
     Test class for User class
     """
-    
+
     def test_userAttributes(self):
         """
         test if an object is instanciated correctly
@@ -30,7 +30,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(type(user1.id), str)
         self.assertEqual(type(user1.created_at), datetime)
         self.assertEqual(type(user1.updated_at), datetime)
-        #test serialization and deserialization
+        # test serialization and deserialization
         with open("file.json", 'r') as f:
             data_dict = json.load(f)
         key = "User.{}".format(user1.id)

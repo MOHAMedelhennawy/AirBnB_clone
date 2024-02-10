@@ -2,6 +2,7 @@
 
 import cmd
 import sys
+import models
 from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
@@ -109,7 +110,6 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         except KeyError:
             print("** no instance found **")
-
 
     def do_all(self, arg):
         """
