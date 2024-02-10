@@ -42,6 +42,15 @@ class TestFileStorage(unittest.TestCase):
 
         self.assertFalse(os.path.exists("file.json"))
 
+    def test_attributes(self):
+        """
+        Test FileStorage class attribute
+        """
+        self.assertEqual(FileStorage._FileStorage__file_path, "file.json")
+        self.assertIsInstance(FileStorage._FileStorage__file_path, str)
+        self.assertEqual(FileStorage._FileStorage__objects, {})
+        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
+
     def test_all(self):
         """
         Test all method
