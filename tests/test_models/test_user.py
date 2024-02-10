@@ -30,8 +30,10 @@ class TestBase(unittest.TestCase):
         test if an object is instanciated correctly
         """
         user1 = User()
-        user1.address = "milan"
         user1.save()
+        self.assertEqual(user1.first_name, "")
+        user1.first_name = "Betty"
+        self.assertEqual(user1.first_name, "Betty")
         self.assertTrue(isinstance(user1, BaseModel))
         self.assertEqual(type(user1.email), str)
         self.assertEqual(type(user1.password), str)
