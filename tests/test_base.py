@@ -131,7 +131,7 @@ class TestBase(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             my_model.save("passing arguments")
         Err_msg = (
-            "save() takes 1 positional argument but 2 were given"
+            "BaseModel.save() takes 1 positional argument but 2 were given"
             )
         self.assertEqual(Err_msg, str(msg.exception))
 
@@ -160,7 +160,7 @@ class TestBase(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             my_model_json = my_model.to_dict("Args")
         Err_msg = (
-            "to_dict() takes 1 positional argument but 2 were given"
+            "BaseModel.to_dict() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 

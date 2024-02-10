@@ -6,6 +6,11 @@ import json
 from os import path
 from models.base_model import BaseModel
 from models.user import User
+from models.city import City
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -52,7 +57,10 @@ class FileStorage:
         """
         deserializes the JSON file to __objects
         """
-        cls = {'BaseModel': BaseModel, 'User': User}
+        cls = {
+        "BaseModel": BaseModel, "User": User, "City": City,
+        "Place": Place, "Review": Review, "Amenity": Amenity, "State": State
+                    }
         try:
             with open(self.__file_path, 'r') as file_obj:
                 data_dict = json.load(file_obj)

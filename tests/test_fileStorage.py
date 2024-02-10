@@ -53,7 +53,7 @@ class TestStorage(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             all_objs = storage.all("This arg")
         Err_msg = (
-            "all() takes 1 positional argument but 2 were given"
+            "FileStorage.all() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 
@@ -74,7 +74,7 @@ class TestStorage(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             my_model.save("This arg")
         Err_msg = (
-            "save() takes 1 positional argument but 2 were given"
+            "BaseModel.save() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 
@@ -98,7 +98,7 @@ class TestStorage(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             storage.reload("This arg")
         Err_msg = (
-            "reload() takes 1 positional argument but 2 were given"
+            "FileStorage.reload() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 

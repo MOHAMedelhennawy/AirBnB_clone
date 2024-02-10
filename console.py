@@ -4,13 +4,22 @@ import cmd
 import sys
 import models
 from models import storage
+from models.user import User
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.state import State
+from models.review import Review
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
-    Classes_dict = {"BaseModel": BaseModel}
+    Classes_dict = {
+        "BaseModel": BaseModel, "User": User, "City": City,
+        "Place": Place, "Review": Review, "Amenity": Amenity, "State": State
+                    }
     all_objs = storage.all()
     instance_representation = []
 
@@ -168,7 +177,6 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
 
-        # print(obj_dict)
         var, value = cmd_args[2], cmd_args[3].strip('"')
         if var not in ["id", "updated_at", "created_at"]:
             setattr(obj_dict, var, value)
