@@ -111,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        cmd_args = arg.split()
+        cmd_args = arg.split(" ")
         if cmd_args[0] not in self.Classes_dict.keys():
             print("** class doesn't exist **")
             return
@@ -121,6 +121,10 @@ class HBNBCommand(cmd.Cmd):
             return
         key = "{}.{}".format(cmd_args[0], cmd_args[1])
         try:
+            if len(self.instance_representation) == 0:
+                self.instance_representation = []
+                for obj_dict in self.all_objs.values():
+                    self.instance_representation.append(str(obj_dict))
             deleted_representaiton = str(self.all_objs[key])
             self.instance_representation.remove(deleted_representaiton)
             del self.all_objs[key]
