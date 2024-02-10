@@ -1,19 +1,18 @@
 #!/usr/bin/python3
 """
-This Model contains review class
+Review class, a subclass of BaseModel class
 """
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
     """
-    class that defines the review
-
-    Attributes:
-    place_id (str): it will be the Place.id
-    user_id (str): it will be the User.id
-    text (str): empty text
+    A subclass of BaseModel class
+    Public class attributes:
+        place_id:            (str) will be Place.id
+        user_id:             (str) will be User.id
+        text:                (str)
     """
-    place_id = ''
-    user_id = ''
-    text = ''
+    place_id = ""
+    user_id = ""
+    text = ""

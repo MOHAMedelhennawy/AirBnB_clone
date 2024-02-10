@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+console.py that contains the entry point of the command interpreter
+"""
+
 
 import cmd
 import sys
@@ -15,6 +19,11 @@ from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
+    """
+    HBNBC command interpreter
+    """
+
+
     prompt = "(hbnb) "
     Classes_dict = {
         "BaseModel": BaseModel, "User": User, "City": City,

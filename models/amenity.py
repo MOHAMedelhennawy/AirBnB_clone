@@ -1,15 +1,14 @@
 #!/usr/bin/python3
 """
-This Model contains amenity class
+Amenity class, a subclass of BaseModel
 """
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
     """
-    class that defines the amenity
-
-    Attributes:
-    name (str): the amenity name
+    A subclass of BaseModel class
+    Public class attribute:
+        name: (str)
     """
-    name = ''
+    name = ""

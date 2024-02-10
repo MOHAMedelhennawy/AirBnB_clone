@@ -43,11 +43,17 @@ class TestState(unittest.TestCase):
         Test state class attribute
         """
         state_obj = State()
-        state_obj.name = "Betty"
         state_obj.save()
-        self.assertEqual(state_obj.name, "Betty")
+        self.assertEqual(state_obj.name, "")
         self.assertIsInstance(state_obj, State)
         self.assertTrue(isinstance(state_obj, BaseModel))
+        state_obj.save()
+        self.assertEqual(state_obj.name, "")
+        self.assertIsNotNone(state_obj.name)
+        self.assertIsInstance(state_obj, State)
+        self.assertTrue(isinstance(state_obj, BaseModel))
+        state_obj.name = "Betty"
+        self.assertEqual(state_obj.name, "Betty")
         self.assertIsInstance(state_obj.name, str)
         self.assertIsNotNone(state_obj.id)
         self.assertIsInstance(state_obj.id, str)

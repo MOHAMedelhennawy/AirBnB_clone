@@ -1,32 +1,30 @@
 #!/usr/bin/python3
 """
-This Model contains place class
+Place class, a subclass of BaseModel class
 """
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
     """
-    class that defines the place
-
-    Attributes:
-    city_id (str): it will be the City.id
-    user_id (str): it will be the user.id
-    name (str): the amenity name
-    description (str): The description of room
-    number_rooms (int): The number of rooms
-    number_bathrooms (int): The number of bathrooms
-    max_guest (int): The number of guest
-    price_by_night (int): Price the room by the night
-    latitude (float): latitude of room
-    longitude (float): longitude of room
-    amenity_ids (list): it will be the list of Amenity.id later
+    A subclass of BaseModel class
+    Public class attributes:
+        city_id:             (str) will be City.id
+        user_id:             (str) will be User.id
+        name:                (str)
+        description:         (str)
+        number_rooms:        (int) 0
+        number_bathrooms:    (int) 0
+        max_guest:           (int) 0
+        price_by_night:      (int) 0
+        latitude:            (float) 0.0
+        longitude:           (float) 0.0
+        amenity_ids:         (list) will be Amenity.id
     """
-
-    city_id = ''
-    user_id = ''
-    name = ''
-    description = ''
+    city_id = ""
+    user_id = ""
+    name = ""
+    description = ""
     number_rooms = 0
     number_bathrooms = 0
     max_guest = 0
