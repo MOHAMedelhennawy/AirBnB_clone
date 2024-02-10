@@ -9,7 +9,7 @@ from datetime import datetime
 from models.base_model import BaseModel
 
 
-class TestBase(unittest.TestCase):
+class TestBaseModel(unittest.TestCase):
     """Test class for BaseModel class."""
 
     def test_base(self):
@@ -131,7 +131,7 @@ class TestBase(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             my_model.save("passing arguments")
         Err_msg = (
-            "BaseModel.save() takes 1 positional argument but 2 were given"
+            "save() takes 1 positional argument but 2 were given"
             )
         self.assertEqual(Err_msg, str(msg.exception))
 
@@ -160,7 +160,7 @@ class TestBase(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             my_model_json = my_model.to_dict("Args")
         Err_msg = (
-            "BaseModel.to_dict() takes 1 positional argument but 2 were given"
+            "to_dict() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 

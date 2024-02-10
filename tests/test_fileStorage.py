@@ -14,7 +14,7 @@ from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
 
-class TestStorage(unittest.TestCase):
+class TestFileStorage(unittest.TestCase):
     """Test class for FileStorage class."""
 
     def setUp(self):
@@ -53,7 +53,7 @@ class TestStorage(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             all_objs = storage.all("This arg")
         Err_msg = (
-            "FileStorage.all() takes 1 positional argument but 2 were given"
+            "all() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 
@@ -74,7 +74,7 @@ class TestStorage(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             my_model.save("This arg")
         Err_msg = (
-            "BaseModel.save() takes 1 positional argument but 2 were given"
+            "save() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 
@@ -98,7 +98,7 @@ class TestStorage(unittest.TestCase):
         with self.assertRaises(TypeError) as msg:
             storage.reload("This arg")
         Err_msg = (
-            "FileStorage.reload() takes 1 positional argument but 2 were given"
+            "reload() takes 1 positional argument but 2 were given"
                    )
         self.assertEqual(Err_msg, str(msg.exception))
 

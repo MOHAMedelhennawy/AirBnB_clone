@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""Unittest User.
-Test cases for User class.
+"""Unittest State.
+Test cases for state class.
 """
 
 
@@ -12,12 +12,16 @@ from datetime import datetime
 from models.engine.file_storage import FileStorage
 import os
 
-class TestBase(unittest.TestCase):
+
+class TestState(unittest.TestCase):
     """
     Test class for State class
     """
 
     def setUp(self):
+        """
+        setup method for test state
+        """
         try:
             os.remove("file.json")
         except FileNotFoundError:
@@ -40,13 +44,23 @@ class TestBase(unittest.TestCase):
         """
         state_obj = State()
         state_obj.name = "Betty"
+        state_obj.save()
         self.assertEqual(state_obj.name, "Betty")
         self.assertIsInstance(state_obj, State)
+        self.assertTrue(isinstance(state_obj, BaseModel))
         self.assertIsInstance(state_obj.name, str)
         self.assertIsNotNone(state_obj.id)
         self.assertIsInstance(state_obj.id, str)
+        self.assertEqual(type(state_obj.created_at), datetime)
+        self.assertEqual(type(state_obj.updated_at), datetime)
+        self.assertIsNotNone(state_obj.created_at)
+        self.assertIsNotNone(state_obj.updated_at)
         state_obj2 = State(name="My_First_Name", my_number=43)
         self.assertEqual(state_obj2.name, "My_First_Name")
         self.assertIsInstance(state_obj2.name, str)
         self.assertEqual(state_obj2.my_number, 43)
         self.assertIsInstance(state_obj2.my_number, int)
+        with open("file.json", 'r') as f:
+            data_dict = json.load(f)
+        key = "State.{}".format(state_obj.id)
+        self.assertTrue(bool(data_dict[key]))

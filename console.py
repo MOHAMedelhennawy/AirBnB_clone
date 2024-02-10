@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         key = "{}.{}".format(cmd_args[0], cmd_args[1])
         try:
             cls_name = self.Classes_dict[cmd_args[0]]
-            print(cls_name(self.all_objs[key]))
+            print(self.all_objs[key])
         except KeyError:
             print("** no instance found **")
 
@@ -139,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
                 return
             for obj_dict in self.all_objs.values():
                 cls_name = self.Classes_dict[arg]
-                if isinstance(obj_dict, cls_name):
+                if type(obj_dict) == cls_name:
                     self.instance_representation.append(str(obj_dict))
         print(self.instance_representation)
 
@@ -178,7 +178,9 @@ class HBNBCommand(cmd.Cmd):
             return
 
         var, value = cmd_args[2], cmd_args[3].strip('"')
-        if var not in ["id", "updated_at", "created_at"]:
+        list_args = ["id", "updated_at", "created_at"]
+        list_values = [str, int, float]
+        if var not in list_args and type(value) in list_values:
             setattr(obj_dict, var, value)
             obj_dict.save()
 

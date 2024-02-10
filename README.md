@@ -132,7 +132,7 @@ e7c811b1-1f11-4952-95e4-e378b7c59512
 (hbnb)
 ```
 
-# Finaly
+# Finally
 If you want more info you're simply write `help` or `help <command>`. to exit the program, write `EOF` or `quit`:
 ```
 (hbnb) help

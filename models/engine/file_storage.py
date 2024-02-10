@@ -58,8 +58,9 @@ class FileStorage:
         deserializes the JSON file to __objects
         """
         cls = {
-        "BaseModel": BaseModel, "User": User, "City": City,
-        "Place": Place, "Review": Review, "Amenity": Amenity, "State": State
+                "BaseModel": BaseModel, "User": User, "City": City,
+                "Place": Place, "Review": Review, "Amenity": Amenity,
+                "State": State
                     }
         try:
             with open(self.__file_path, 'r') as file_obj:
