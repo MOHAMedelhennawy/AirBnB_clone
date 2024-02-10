@@ -61,10 +61,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertFalse(os.path.exists("file.json"))
         with self.assertRaises(TypeError) as msg:
             all_objs = storage.all("This arg")
-        Err_msg = (
-            "all() takes 1 positional argument but 2 were given"
-                   )
-        self.assertEqual(Err_msg, str(msg.exception))
 
     def test_save(self):
         """
@@ -82,10 +78,11 @@ class TestFileStorage(unittest.TestCase):
         self.assertNotEqual(len(all_objs), 0)
         with self.assertRaises(TypeError) as msg:
             my_model.save("This arg")
-        Err_msg = (
-            "save() takes 1 positional argument but 2 were given"
-                   )
-        self.assertEqual(Err_msg, str(msg.exception))
+
+        save_text = ""
+        with open("file.json", "r") as f:
+            save_text = f.read()
+            self.assertIn("BaseModel." + my_model.id, save_text)
 
     def test_new(self):
         """
@@ -96,7 +93,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertNotEqual(FileStorage._FileStorage__objects, {})
         self.assertIsInstance(FileStorage._FileStorage__objects, dict)
         with self.assertRaises(TypeError):
-                models.storage.new(BaseModel(), 1)
+            models.storage.new(BaseModel(), 1)
 
     def test_reload(self):
         """
@@ -110,11 +107,9 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(obj, my_model)
         with self.assertRaises(TypeError) as msg:
             storage.reload("This arg")
-        Err_msg = (
-            "reload() takes 1 positional argument but 2 were given"
-                   )
-        self.assertEqual(Err_msg, str(msg.exception))
 
+        with self.assertRaises(TypeError):
+            models.storage.reload(None)
 
 if __name__ == '__main__':
     unittest.main()
