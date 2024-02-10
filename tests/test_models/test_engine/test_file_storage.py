@@ -93,6 +93,10 @@ class TestFileStorage(unittest.TestCase):
         """
         my_model = BaseModel()
         self.assertTrue(bool(FileStorage._FileStorage__objects))
+        self.assertNotEqual(FileStorage._FileStorage__objects, {})
+        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
+        with self.assertRaises(TypeError):
+                models.storage.new(BaseModel(), 1)
 
     def test_reload(self):
         """
