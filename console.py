@@ -23,7 +23,6 @@ class HBNBCommand(cmd.Cmd):
     HBNBC command interpreter
     """
 
-
     prompt = "(hbnb) "
     Classes_dict = {
         "BaseModel": BaseModel, "User": User, "City": City,
