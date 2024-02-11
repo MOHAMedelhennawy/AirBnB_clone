@@ -37,6 +37,42 @@ class TestHBNBCommand(unittest.TestCase):
             out = output.getvalue().strip()
             self.assertTrue(uuid.UUID(out, version=4))
 
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "create User"
+            HBNBCommand().onecmd(input)
+            out = output.getvalue().strip()
+            self.assertTrue(uuid.UUID(out, version=4))
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "create State"
+            HBNBCommand().onecmd(input)
+            out = output.getvalue().strip()
+            self.assertTrue(uuid.UUID(out, version=4))
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "create City"
+            HBNBCommand().onecmd(input)
+            out = output.getvalue().strip()
+            self.assertTrue(uuid.UUID(out, version=4))
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "create Amenity"
+            HBNBCommand().onecmd(input)
+            out = output.getvalue().strip()
+            self.assertTrue(uuid.UUID(out, version=4))
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "create Place"
+            HBNBCommand().onecmd(input)
+            out = output.getvalue().strip()
+            self.assertTrue(uuid.UUID(out, version=4))
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "create Review"
+            HBNBCommand().onecmd(input)
+            out = output.getvalue().strip()
+            self.assertTrue(uuid.UUID(out, version=4))
+
     def test_show(self):
         """
         Test show function in console
