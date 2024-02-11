@@ -322,3 +322,45 @@ class TestHBNBCommand(unittest.TestCase):
             expected_out = "** instance id missing **"
             HBNBCommand().onecmd(input)
             self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "update BaseModel 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "update User 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "update State 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "update City 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "update Place 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "update Review 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "update Amenity 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
