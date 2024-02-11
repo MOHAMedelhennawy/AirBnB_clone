@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 from io import StringIO
 from console import HBNBCommand
+import uuid
 
 
 class TestHBNBCommand(unittest.TestCase):
@@ -29,6 +30,12 @@ class TestHBNBCommand(unittest.TestCase):
             expected_out = "** class doesn't exist **"
             HBNBCommand().onecmd(input)
             self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "create BaseModel"
+            HBNBCommand().onecmd(input)
+            out = output.getvalue().strip()
+            self.assertTrue(uuid.UUID(out, version=4))
 
     def test_show(self):
         """
