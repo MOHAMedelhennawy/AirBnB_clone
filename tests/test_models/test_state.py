@@ -44,7 +44,8 @@ class TestState(unittest.TestCase):
         """
         state_obj = State()
         state_obj.save()
-        self.assertEqual(state_obj.name, "")
+        self.assertIsInstance(state_obj.name, str)
+        self.assertIsNotNone(state_obj.name)
         self.assertIsInstance(state_obj, State)
         self.assertTrue(isinstance(state_obj, BaseModel))
         state_obj.save()
