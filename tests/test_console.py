@@ -288,6 +288,18 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertEqual(expected_out, output.getvalue().strip())
 
         with patch('sys.stdout', new=StringIO()) as output:
+            input = "update BaseModel ace8fcd9-dffd-4d42-a3e0-fd6e3a7684a7"
+            expected_out = "** attribute name missing **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "update BaseModel ace8fcd9-dffd-4d42-a3e0-fd6e3a7684a7 fir"
+            expected_out = "** value missing **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
             input = "update BaseModel"
             expected_out = "** instance id missing **"
             HBNBCommand().onecmd(input)
