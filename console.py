@@ -204,13 +204,14 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def default(self, arg):
+        exp = r'(\w+)\.(\w+)\("([^"]+)"(?:,\s*"([^"]+)")?(?:,\s*"([^"]+)")?\)'
         commands_dict = {"all": self.do_all, "count": self.count}
         commands_dict2 = {"show": self.do_show, "destroy": self.do_destroy}
         pattern_count = re.compile(r'(\w+)\.(\w+)\(\)')
-        pattern_show_update = re.compile(r'(\w+)\.(\w+)\("([^"]+)"(?:,\s*"([^"]+)")?(?:,\s*"([^"]+)")?\)')
+        pattern_show_update = re.compile(exp)
 
         # Iterate over the lines
-        
+
         # Try to match the count pattern
         match_count = pattern_count.match(arg)
         if match_count:
@@ -234,6 +235,7 @@ class HBNBCommand(cmd.Cmd):
                 commands_dict2[command](f"{class_name} {id_value}")
             elif command == "update":
                 self.do_update(f"{class_name} {id_value} {key} {value}")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
