@@ -50,7 +50,6 @@ class TestState(unittest.TestCase):
         self.assertTrue(isinstance(state_obj, BaseModel))
         state_obj.save()
         self.assertEqual(state_obj.name, "")
-        self.assertIsNotNone(state_obj.name)
         self.assertIsInstance(state_obj, State)
         self.assertTrue(isinstance(state_obj, BaseModel))
         self.assertIsNotNone(state_obj.id)
