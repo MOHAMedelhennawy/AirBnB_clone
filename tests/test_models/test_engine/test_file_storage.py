@@ -17,7 +17,6 @@ from models.base_model import BaseModel
 class TestFileStorage(unittest.TestCase):
     """Test class for FileStorage class."""
 
-    @classmethod
     def setUp(self):
         try:
             os.remove("file.json")
@@ -107,6 +106,14 @@ class TestFileStorage(unittest.TestCase):
         all_objs = storage.all()
         obj = all_objs['BaseModel.{}'.format(my_model.id)]
         self.assertEqual(obj, my_model)
+        my_model1 = BaseModel()
+        my_model1.save()
+        all_objs = storage.all()
+        obj = all_objs['BaseModel.{}'.format(my_model.id)]
+        obj1 = all_objs['BaseModel.{}'.format(my_model1.id)]
+        self.assertNotEqual(all_objs, {})
+        self.assertEqual(len(all_objs), 2)
+        self.assertNotEqual(len(all_objs), 0)
         with self.assertRaises(TypeError) as msg:
             storage.reload("This arg")
 
