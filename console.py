@@ -204,20 +204,36 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def default(self, arg):
-        commands_dict = {"all()": self.do_all, "count()": self.count}
+        commands_dict = {"all": self.do_all, "count": self.count}
         commands_dict2 = {"show": self.do_show, "destroy": self.do_destroy}
-        class_name, command = arg.split(".")
+        pattern_count = re.compile(r'(\w+)\.(\w+)\(\)')
+        pattern_show_update = re.compile(r'(\w+)\.(\w+)\("([^"]+)"(?:,\s*"([^"]+)")?(?:,\s*"([^"]+)")?\)')
+
+        # Iterate over the lines
+        
+        # Try to match the count pattern
+        match_count = pattern_count.match(arg)
+        if match_count:
+            class_name = match_count.group(1)
+            command = match_count.group(2)
+        else:
+            # Try to match the show or update pattern
+            match_show_update = pattern_show_update.match(arg)
+            if match_show_update:
+                class_name = match_show_update.group(1)
+                command = match_show_update.group(2)
+                id_value = match_show_update.group(3)
+                key = match_show_update.group(4)
+                value = match_show_update.group(5)
+
         if class_name in self.Classes_dict:
             if command in commands_dict.keys():
                 commands_dict[command](class_name)
                 return
-            else:
-                match = re.match(r'(\w+)\("([\w-]+)"\)', command)
-                command = match.group(1)
-                class_id = match.group(2)
-                if command in commands_dict2.keys():
-                    commands_dict2[command](f"{class_name} {class_id}")
-
+            elif command in commands_dict2.keys():
+                commands_dict2[command](f"{class_name} {id_value}")
+            elif command == "update":
+                self.do_update(f"{class_name} {id_value} {key} {value}")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
