@@ -125,6 +125,48 @@ class TestHBNBCommand(unittest.TestCase):
             HBNBCommand().onecmd(input)
             self.assertEqual(expected_out, output.getvalue().strip())
 
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "show BaseModel 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "show User 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "show State 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "show City 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "show Place 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "show Review 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "show Amenity 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
     def test_destroy(self):
         """
         Test destroy function in console
@@ -174,6 +216,48 @@ class TestHBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as output:
             input = "destroy Review"
             expected_out = "** instance id missing **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "destroy BaseModel 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "destroy User 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "destroy State 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "destroy City 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "destroy Place 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "destroy Review 1212"
+            expected_out = "** no instance found **"
+            HBNBCommand().onecmd(input)
+            self.assertEqual(expected_out, output.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as output:
+            input = "destroy Amenity 1212"
+            expected_out = "** no instance found **"
             HBNBCommand().onecmd(input)
             self.assertEqual(expected_out, output.getvalue().strip())
 
