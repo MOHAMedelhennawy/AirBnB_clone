@@ -138,7 +138,6 @@ class HBNBCommand(cmd.Cmd):
         based or not on the class name.
         Usage: all OR all <class name>
         """
-
         self.instance_representation = []
         if not arg:
             if self.all_objs:
@@ -196,6 +195,18 @@ class HBNBCommand(cmd.Cmd):
             setattr(obj_dict, var, value)
             obj_dict.save()
 
+    def count(self, arg):
+        count = 0
+        for i in self.all_objs.keys():
+            if arg in i:
+                count += 1
+        print(count)
+
+    def default(self, arg):
+        commands_dict = {"all()": self.do_all, "count()": self.count}
+        line = arg.split(".")
+        if line[0] in self.Classes_dict and line[1] in commands_dict:
+            commands_dict[line[1]](line[0])
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
