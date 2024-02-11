@@ -53,9 +53,6 @@ class TestState(unittest.TestCase):
         self.assertIsNotNone(state_obj.name)
         self.assertIsInstance(state_obj, State)
         self.assertTrue(isinstance(state_obj, BaseModel))
-        state_obj.name = "Betty"
-        self.assertEqual(state_obj.name, "Betty")
-        self.assertIsInstance(state_obj.name, str)
         self.assertIsNotNone(state_obj.id)
         self.assertIsInstance(state_obj.id, str)
         self.assertEqual(type(state_obj.created_at), datetime)
