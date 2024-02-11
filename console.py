@@ -7,6 +7,7 @@ console.py that contains the entry point of the command interpreter
 import cmd
 import sys
 import models
+import re
 from models import storage
 from models.user import User
 from models.city import City
@@ -204,9 +205,19 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, arg):
         commands_dict = {"all()": self.do_all, "count()": self.count}
-        line = arg.split(".")
-        if line[0] in self.Classes_dict and line[1] in commands_dict:
-            commands_dict[line[1]](line[0])
+        commands_dict2 = {"show": self.do_show, "destroy": self.do_destroy}
+        class_name, command = arg.split(".")
+        if class_name in self.Classes_dict:
+            if command in commands_dict.keys():
+                commands_dict[command](class_name)
+                return
+            else:
+                match = re.match(r'(\w+)\("([\w-]+)"\)', command)
+                command = match.group(1)
+                class_id = match.group(2)
+                if command in commands_dict2.keys():
+                    commands_dict2[command](f"{class_name} {class_id}")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
