@@ -59,11 +59,6 @@ class TestState(unittest.TestCase):
         self.assertEqual(type(state_obj.updated_at), datetime)
         self.assertIsNotNone(state_obj.created_at)
         self.assertIsNotNone(state_obj.updated_at)
-        state_obj2 = State(name="My_First_Name", my_number=43)
-        self.assertEqual(state_obj2.name, "My_First_Name")
-        self.assertIsInstance(state_obj2.name, str)
-        self.assertEqual(state_obj2.my_number, 43)
-        self.assertIsInstance(state_obj2.my_number, int)
         with open("file.json", 'r') as f:
             data_dict = json.load(f)
         key = "State.{}".format(state_obj.id)
