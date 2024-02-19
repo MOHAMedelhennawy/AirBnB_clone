@@ -31,6 +31,9 @@
     bottom: 88px;
     padding: 12px;
     justify-content: center;
+    z-index: -1;
+    justify-content: space-around;
+    align-content: ;
 }
 .price_by_night h2{
     position: inherit;
