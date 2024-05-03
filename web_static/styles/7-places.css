@@ -1,19 +1,21 @@
-.Places
-{
-    text-align: center;
+.places {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
-.Places h1{
+.places h1 {
     font-size: 30px;
+    width: 100%;
 }
-.Places article{
+.places article {
     width: 390px;
     padding: 20px;
     margin: 20px;
-    border: 1px #FF5A5F solid;
+    border: 1px solid #FF5A5F;
     border-radius: 4px;
-    display: inline-block;
 }
-.Places h2{
+.places article h2 {
     font-size: 30px;
-    align-items: center;
+    text-align: center;
 }
